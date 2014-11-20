@@ -31,11 +31,13 @@ function [bok,scribble_count, fg_scribbles, histo_fg, histo_bg] = get_histograms
     %----------------------------------------------------------------------
 
     foregroundMap = reference_frame ~= frames_scribbles(:,:,:,1);
-    backgroundMap = reference_frame ~= frames_scribbles(:,:,:,1);
+    backgroundMap = reference_frame ~= frames_scribbles(:,:,:,2);
 
     %----------------------------------------------------------------------
     % Task b: Generate color models for foreground and background
     %----------------------------------------------------------------------
     
+    histo_fg = colHist(reference_frame(:,:,1), reference_frame(:,:,2), reference_frame(:,:,3), foregroundMap);
+    histo_bg = colHist(reference_frame(:,:,1), reference_frame(:,:,2), reference_frame(:,:,3), backgroundMap);
     
 end
