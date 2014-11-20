@@ -37,7 +37,7 @@ function [bok,scribble_count, fg_scribbles, histo_fg, histo_bg] = get_histograms
     backgroundMap = backgroundMap(:,:,1) .* backgroundMap(:,:,2) .* backgroundMap(:,:,3);
     
     figure;
-    imshow(fg_scribbles);
+    imshow(fg_scribbles*255);
     
     %----------------------------------------------------------------------
     % Task b: Generate color models for foreground and background
