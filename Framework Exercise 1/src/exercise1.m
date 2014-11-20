@@ -66,7 +66,7 @@ function exercise1(input_directory, output_directory, file_extension)
             % Task c: Generate Cost-Volume 
             %--------------------------------------------------------------
             % call function segmentation 
-            foreground_Map = segmentation(frames,fg_scribbles,Hfc,Hbc,bins)
+            foreground_Map = uint8(segmentation(frames,fg_scribbles,Hfc,Hbc,bins));
 
             % store frames
             for i = 1:size(frames,4)    
