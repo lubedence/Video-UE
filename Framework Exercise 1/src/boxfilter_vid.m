@@ -27,7 +27,13 @@ function imDst = boxfilter_vid(vidSrcC, r, rt)
     % Task d.	Extension of the guided image filter to a guided video 
     %           filter
     %----------------------------------------------------------------------
-   
+    
+    % cumulative sum over Z axis
+    imCum = cumsum(imDst, 3);
+    % difference over Z axis
+    imDst(:, :, 1:r+1) = imCum(:, :, 1+r:2*r+1);
+    imDst(:, :, r+2:time-r) = imCum(:, :, 2*r+2:time) - imCum(:, :, 1:time-2*r-1);
+    imDst(:, :, time-r+1:time) = repmat(imCum(:, :, time), [1, 1, r]) - imCum(:, :, time-2*r:time-r-1);
     
     
 end
