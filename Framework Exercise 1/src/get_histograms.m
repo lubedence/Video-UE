@@ -30,8 +30,8 @@ function [bok,scribble_count, fg_scribbles, histo_fg, histo_bg] = get_histograms
     % Task a: Filter user scribbles to indicate foreground and background   
     %----------------------------------------------------------------------
 
-    fg_scribbles = reference_frame ~= frames_scribbles(:,:,:,1);
-    backgroundMap = reference_frame ~= frames_scribbles(:,:,:,2);
+    fg_scribbles = uint8(reference_frame ~= frames_scribbles(:,:,:,1));
+    backgroundMap = uint8(reference_frame ~= frames_scribbles(:,:,:,2));
     
     fg_scribbles = fg_scribbles(:,:,1) .* fg_scribbles(:,:,2) .* fg_scribbles(:,:,3);
     backgroundMap = backgroundMap(:,:,1) .* backgroundMap(:,:,2) .* backgroundMap(:,:,3);
