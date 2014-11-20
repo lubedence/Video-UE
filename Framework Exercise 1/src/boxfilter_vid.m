@@ -31,9 +31,9 @@ function imDst = boxfilter_vid(vidSrcC, r, rt)
     % cumulative sum over Z axis
     imCum = cumsum(imDst, 3);
     % difference over Z axis
-    imDst(:, :, 1:r+1) = imCum(:, :, 1+r:2*r+1);
-    imDst(:, :, r+2:time-r) = imCum(:, :, 2*r+2:time) - imCum(:, :, 1:time-2*r-1);
-    imDst(:, :, time-r+1:time) = repmat(imCum(:, :, time), [1, 1, r]) - imCum(:, :, time-2*r:time-r-1);
+    imDst(:, :, 1:rt+1) = imCum(:, :, 1+rt:2*rt+1);
+    imDst(:, :, rt+2:time-rt) = imCum(:, :, 2*rt+2:time) - imCum(:, :, 1:time-2*rt-1);
+    imDst(:, :, time-rt+1:time) = repmat(imCum(:, :, time), [1, 1, rt]) - imCum(:, :, time-2*rt:time-rt-1);
     
     
 end
