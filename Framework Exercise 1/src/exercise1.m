@@ -30,6 +30,8 @@ function exercise1(input_directory, output_directory, file_extension)
     % call function get_histograms 
     bins = 20;
     [bok,scribble_count, fg_scribbles, histo_fg, histo_bg] = get_histograms(input_directory,file_list,bins);
+    Hfc = histo_fg / sum(histo_fg);
+    Hbc = histo_bg / sum(histo_bg);
     
     
     if (~bok)
@@ -64,7 +66,7 @@ function exercise1(input_directory, output_directory, file_extension)
             % Task c: Generate Cost-Volume 
             %--------------------------------------------------------------
             % call function segmentation 
-            % return parameter=segmentation(parameters,...);
+            foreground_Map = segmentation(frames,fg_scribbles,Hfc,Hbc,bins)
 
             % store frames
             for i = 1:size(frames,4)    

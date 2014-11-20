@@ -2,7 +2,10 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
     %----------------------------------------------------------------------
     % Task c: Generate cost-volume
     %----------------------------------------------------------------------
-   
+    
+    cost = Hfc ./ (Hfc + Hbc);
+    cost(isnan(cost))=0;
+    
     
     %----------------------------------------------------------------------
     % Task e: Filter cost-volume with guided filter
