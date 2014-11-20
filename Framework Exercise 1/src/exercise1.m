@@ -28,7 +28,8 @@ function exercise1(input_directory, output_directory, file_extension)
     %----------------------------------------------------------------------
     bok = false;
     % call function get_histograms 
-    % [return parameters]=get_histograms(parameters,...);
+    bins = 20;
+    [bok,scribble_count, fg_scribbles, histo_fg, histo_bg] = get_histograms(input_directory,file_list,bins);
     
     
     if (~bok)
