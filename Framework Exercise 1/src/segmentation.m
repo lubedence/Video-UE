@@ -5,13 +5,19 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
     
     cost = Hfc ./ (Hfc + Hbc);
     cost(isnan(cost))=0;
+    costBin = (cost > 0.5) * 255;
     
+    foreground_map = zeros(size(frames,1),size(frames,2),size(frames,4));
+    f=double(bins)/256.0;
     
-    
-    foreground_map=zeros(size(frames,1),size(frames,2),size(frames,4));
     for i = 1:size(frames,4)
         
-        foreground_map(:,:,i) = (frames(:,:,1,i) + frames(:,:,2,i) + frames(:,:,3,i))/3;
+        frameR = double(frames(:,:,1,i));
+        frameG = double(frames(:,:,2,i));
+        frameB = double(frames(:,:,3,i));
+        
+        histIDs=floor(frameR*f) + floor(frameG*f)*bins + floor(frameB*f)*bins*bins+1;
+        foreground_map(:,:,i) = arrayfun(@(id) (costBin(id) ), histIDs);
         
     %----------------------------------------------------------------------
     % Task e: Filter cost-volume with guided filter
