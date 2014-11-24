@@ -20,13 +20,14 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
        
     end
     
+    
     %----------------------------------------------------------------------
     % Task e: Filter cost-volume with guided filter
     %----------------------------------------------------------------------
     
-    imageFilterRadius = 3;
+    imageFilterRadius = 5;
     videoFilterRadius = 1;
-    epsilon = 0.001;
+    epsilon = 0.1;
     foregroundThreshold = 0.4;
     foreground_map = guidedfilter_vid_color(frames, foreground_map, imageFilterRadius, videoFilterRadius, epsilon) > foregroundThreshold;
     
