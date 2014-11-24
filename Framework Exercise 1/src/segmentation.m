@@ -23,7 +23,8 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
     %----------------------------------------------------------------------
     % Task e: Filter cost-volume with guided filter
     %----------------------------------------------------------------------
-    foreground_map =  guidedfilter_vid_color(frames, foreground_map, 1, 1, 0.1);
+    
+    foreground_map =  guidedfilter_vid_color(frames, foreground_map, 3, 1, 0.1);
     
     %----------------------------------------------------------------------
     % Task f: delete regions which are not connected to foreground scribble
