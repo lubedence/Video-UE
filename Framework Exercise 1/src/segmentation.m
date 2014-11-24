@@ -24,7 +24,10 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
     % Task e: Filter cost-volume with guided filter
     %----------------------------------------------------------------------
     
-    foreground_map =  guidedfilter_vid_color(frames, foreground_map, 3, 1, 0.1);
+    imageFilterRadius = 3;
+    videoFilterRadius = 1;
+    epsilon = 0.001;
+    foreground_map =  guidedfilter_vid_color(frames, foreground_map, imageFilterRadius, videoFilterRadius, epsilon);
     
     %----------------------------------------------------------------------
     % Task f: delete regions which are not connected to foreground scribble
@@ -38,7 +41,7 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
     % Task g: Guided feathering
     %----------------------------------------------------------------------
     
-    foreground_map =  guidedfilter_vid_color(frames, foreground_map, 3, 1, 0.1);
+    foreground_map =  guidedfilter_vid_color(frames, foreground_map, imageFilterRadius, videoFilterRadius, epsilon);
     
     
     foreground_map = foreground_map * 255;
