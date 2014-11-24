@@ -27,7 +27,8 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
     imageFilterRadius = 3;
     videoFilterRadius = 1;
     epsilon = 0.001;
-    foreground_map =  guidedfilter_vid_color(frames, foreground_map, imageFilterRadius, videoFilterRadius, epsilon);
+    foregroundThreshold = 0.4;
+    foreground_map = guidedfilter_vid_color(frames, foreground_map, imageFilterRadius, videoFilterRadius, epsilon) > foregroundThreshold;
     
     %----------------------------------------------------------------------
     % Task f: delete regions which are not connected to foreground scribble
