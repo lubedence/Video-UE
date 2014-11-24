@@ -5,7 +5,7 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
     
     cost = Hfc ./ (Hfc + Hbc);
     cost(isnan(cost))=0;
-    costBin = (cost > 0.5) * 255;
+    costBin = (cost > 0.5);
     
     foreground_map = zeros(size(frames,1),size(frames,2),size(frames,4));
     f=double(bins)/256.0;
@@ -36,6 +36,7 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
     %----------------------------------------------------------------------
     
     
+    foreground_map = foreground_map * 255;
     
     
 end
