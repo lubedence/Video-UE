@@ -1,0 +1,28 @@
+1. Why would another object with the same color not be part of the foreground? And what
+would happen if this other object would be very close to the foreground we are looking
+for?
+
+Ein anderes Objekt mit der selben Farbe wird nicht als Vordergrund erkannt, sofern es sich nicht mit dem jeweiligen Vordergrund-Objekt überlagert. 
+Überlagert es sich mit dem Vordergrund-Objekt, würde es als Vordergrund erkannt.
+very close = abhängig von der Filtergröße(Task e: Radien des Guided Filters) und der Distanz zwischen den zwei Objekten könnte sich das Objekt mit dem Vordergrund-Objekt vermischen und darauf hin (Task f) zur Vordergrundmaske dazugehören.
+
+------------------------------------------------------------------------------------------------
+2. Why is it important to take a “good” reference frame for the scribbles, which contains as
+many different colors of the foreground object as possible?
+
+Je mehr Farben des Objektes im Vordergrund-Histogram aufgenommen werden, desto einfacher lässt es sich als Ganzes heraussegmentieren. 
+
+------------------------------------------------------------------------------------------------
+3. What are meaningful parameters for the function “guidedfilter_vid_color” and what are
+they standing for?
+
+
+I_vid: Folge von Video-Frames, z.B. 10 aufeinanderfolgende RGB-Frames welche anschließend als Guidance hergenommen werden.
+
+p_vid: Graustufen Eingangsbild, in unserem Fall die Vordergrundmaskierung welche durch den Filter verfeinert werden soll.
+
+r: örtliche Filtergröße(Radius) für die ersten zwei Dimensionen.
+
+rt: zeitliche Filtergröße (Radius) für die dritte Dimension (Frames vor und nach dem aktuellen Frame).
+
+eps: Regularisierungs-Parameter: Je größer der Parameter, desto größer die Glättung der Segmentierung - je kleiner, desto geringer, sprich höheres Rauschen.
