@@ -30,9 +30,12 @@ function [bok,scribble_count, fg_scribbles, histo_fg, histo_bg] = get_histograms
     % Task a: Filter user scribbles to indicate foreground and background   
     %----------------------------------------------------------------------
 
+    %three binary channels, 1 means foreground-scribble
     fg_scribbles = uint8(reference_frame ~= frames_scribbles(:,:,:,1));
+    %three binary channels, 1 means background-scribble
     backgroundMap = uint8(reference_frame ~= frames_scribbles(:,:,:,2));
     
+    %combine the three channels to a single one
     fg_scribbles = fg_scribbles(:,:,1) .* fg_scribbles(:,:,2) .* fg_scribbles(:,:,3);
     backgroundMap = backgroundMap(:,:,1) .* backgroundMap(:,:,2) .* backgroundMap(:,:,3);
     
@@ -42,7 +45,9 @@ function [bok,scribble_count, fg_scribbles, histo_fg, histo_bg] = get_histograms
     % Task b: Generate color models for foreground and background
     %----------------------------------------------------------------------
     
+    %color histogram for the foreground scribble
     histo_fg = colHist(reference_frame(:,:,1).*fg_scribbles, reference_frame(:,:,2).*fg_scribbles, reference_frame(:,:,3).*fg_scribbles, bins);
+    %color histogram for the background scribble
     histo_bg = colHist(reference_frame(:,:,1).*backgroundMap, reference_frame(:,:,2).*backgroundMap, reference_frame(:,:,3).*backgroundMap, bins);
     
 end
