@@ -29,8 +29,10 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
     % Task f: delete regions which are not connected to foreground scribble
     %----------------------------------------------------------------------
     
- 
-
+    for i = 1:size(foreground_map,3)
+        foreground_map(:,:,i) = keepConnected(foreground_map(:,:,i), FGScribbles);
+    end
+    
     %----------------------------------------------------------------------
     % Task g: Guided feathering
     %----------------------------------------------------------------------
