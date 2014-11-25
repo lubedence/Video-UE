@@ -10,7 +10,8 @@ very close = abhängig von der Filtergröße(Task e: Radien des Guided Filters) und
 2. Why is it important to take a “good” reference frame for the scribbles, which contains as
 many different colors of the foreground object as possible?
 
-Je mehr Farben des Objektes im Vordergrund-Histogram aufgenommen werden, desto einfacher lässt es sich als Ganzes heraussegmentieren. 
+Je mehr Farben des Objektes im Vordergrund-Histogramm aufgenommen werden, desto einfacher lässt es sich als Ganzes heraussegmentieren.
+Wichtig dabei ist, dass nicht nur Farben des Referenz-Bildes sondern auch von so vielen anderen Frames wie möglich enthalten (und markiert) sind. Durch Bewegung des Objekts ändert sich das Farbhistogramm des Vordergrund-Objekts leicht, daher sollte das Ausgewählte so repräsentativ wie möglich sein.
 
 ------------------------------------------------------------------------------------------------
 3. What are meaningful parameters for the function “guidedfilter_vid_color” and what are
