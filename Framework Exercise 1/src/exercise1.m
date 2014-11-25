@@ -28,7 +28,7 @@ function exercise1(input_directory, output_directory, file_extension)
     %----------------------------------------------------------------------
     bok = false;
     % call function get_histograms 
-    bins = 20;
+    bins = 10;
     [bok,scribble_count, fg_scribbles, histo_fg, histo_bg] = get_histograms(input_directory,file_list,bins);
     Hfc = histo_fg / sum(histo_fg);
     Hbc = histo_bg / sum(histo_bg);
