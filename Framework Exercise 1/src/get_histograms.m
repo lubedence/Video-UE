@@ -36,8 +36,8 @@ function [bok,scribble_count, fg_scribbles, histo_fg, histo_bg] = get_histograms
     backgroundMap = uint8(reference_frame ~= frames_scribbles(:,:,:,2));
     
     %combine the three channels to a single one
-    fg_scribbles = fg_scribbles(:,:,1) .* fg_scribbles(:,:,2) .* fg_scribbles(:,:,3);
-    backgroundMap = backgroundMap(:,:,1) .* backgroundMap(:,:,2) .* backgroundMap(:,:,3);
+    fg_scribbles = uint8(fg_scribbles(:,:,1) | fg_scribbles(:,:,2) | fg_scribbles(:,:,3));
+    backgroundMap = uint8(backgroundMap(:,:,1) | backgroundMap(:,:,2) | backgroundMap(:,:,3));
     
     %figure, imshow(fg_scribbles*255);
     
