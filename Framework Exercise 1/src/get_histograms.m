@@ -35,7 +35,7 @@ function [bok,scribble_count, fg_scribbles, histo_fg, histo_bg] = get_histograms
     %three binary channels, 1 means background-scribble
     backgroundMap = uint8(reference_frame ~= frames_scribbles(:,:,:,2));
     
-    %combine the three channels to a single one
+    %mark pixels with a different value on one or more color channels
     fg_scribbles = uint8(fg_scribbles(:,:,1) | fg_scribbles(:,:,2) | fg_scribbles(:,:,3));
     backgroundMap = uint8(backgroundMap(:,:,1) | backgroundMap(:,:,2) | backgroundMap(:,:,3));
     
