@@ -8,8 +8,8 @@ function new_image = get_inbetween_image(image, u, v)
     image = double(image);
     
     [x,y] = meshgrid(1:width, 1:height);
-    x = x + (u*0.5);
-    y = y + (v*0.5);
+    x = x + -(u*0.5);
+    y = y + -(v*0.5);
     
     x = min(max(x, 1), width);
     y = min(max(y,1), height);
