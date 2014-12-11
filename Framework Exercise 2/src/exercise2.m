@@ -40,13 +40,15 @@ function exercise2(input_directory, output_directory, file_extension)
         % call function get_opticalflow 
         % return parameter=get_opticalflow(img1, img2, alpha, iterations);
     
-        flow = get_opticalflow(firstframe, secondframe, alpha, iterations);
+        flow = get_opticalflow(rgb2gray(firstframe), rgb2gray(secondframe), alpha, iterations);
         
         %------------------------------------------------------------------
         % Task b+c: Generate new frame
         %------------------------------------------------------------------
         % call function get_inbetween_image 
         % return parameter=get_inbetween_image(parameters,...);
+        
+        new_image = get_inbetween_image(firstframe, flow(:,:,1), flow(:,:,2));
 
         cnt=cnt+1; imwrite(firstframe,  getFileName(cnt,output_directory,file_extension));
         cnt=cnt+1; imwrite(uint8(new_image),  getFileName(cnt,output_directory,file_extension));
