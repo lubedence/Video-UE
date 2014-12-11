@@ -27,9 +27,13 @@ for i=1:iterations
     %----------------------------------------------------------------------
     % Task a: compute optical flow vectors 
     %----------------------------------------------------------------------
-
-    u = uAvg - ( Fx .* ( ( Fx .* uAvg ) +( Fy .* vAvg ) + Ft ) ) ./ ( Fx.^2 + Fy.^2 + alpha);
-    v = vAvg - ( Fy .* ( ( Fx .* uAvg ) + ( Fy .* vAvg ) + Ft ) ) ./ ( Fx.^2 + Fy.^2 + alpha);
+    
+    smoothnessTerm = Fx.^2 + Fy.^2 + alpha;
+    commonDataTerm = Fx.*uAvg + Fy.*vAvg + Ft;
+    commonTerm = commonDataTerm ./ smoothnessTerm;
+    u = uAvg - Fx.*commonTerm;
+    v = vAvg - Fy.*commonTerm;
+    
     filterSize = 7;
     u = medfilt2(u, [filterSize filterSize]);
     v = medfilt2(v, [filterSize filterSize]);
