@@ -4,8 +4,8 @@ function exercise2(input_directory, output_directory, file_extension)
     close all;  
     
     %parameters
-    alpha = 0.1;
-    iterations = 25;
+    alpha =100;
+    iterations = 200;
 
     % check optional file extension parameter
     if (~exist('file_extension')) || (isempty(file_extension))
