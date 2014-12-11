@@ -46,3 +46,6 @@ Temporary Items
 # project specific ignores
 Framework Exercise 1/output_fg_map/
 Framework Exercise 1/src/*.asv
+
+Framework Exercise 2/output/*.png
+Framework Exercise 2/src/*.asv

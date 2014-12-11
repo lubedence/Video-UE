@@ -8,15 +8,18 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
     costBin = (cost > 0.5); %cost values to binary. 0-0.5 == background, else it's foreground
     
     foreground_map = zeros(size(frames,1),size(frames,2),size(frames,4)); %init output map
-    %match every pixel of each frame to foreground(1) or background(0)
-    %dependig on the costs.
     f=double(bins)/256.0;
     for i = 1:size(frames,4)    
+        
+        %extract the 3 color channels
         frameR = double(frames(:,:,1,i));
         frameG = double(frames(:,:,2,i));
         frameB = double(frames(:,:,3,i));
         
+        %calculate the colors id for looking up in the histogram
         histIDs=floor(frameR*f) + floor(frameG*f)*bins + floor(frameB*f)*bins*bins+1;
+        
+        %match every pixel of each frame to foreground(1) or background(0) dependig on the costs.
         foreground_map(:,:,i) = arrayfun(@(id) (costBin(id) ), histIDs); 
     end
     
@@ -35,6 +38,7 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
     % Task f: delete regions which are not connected to foreground scribble
     %----------------------------------------------------------------------
     
+    %for each frame we want to make sure only regions connected to the scribble are kept
     for i = 1:size(foreground_map,3)
         foreground_map(:,:,i) = keepConnected(foreground_map(:,:,i), FGScribbles);
     end
@@ -43,7 +47,9 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
     % Task g: Guided feathering
     %----------------------------------------------------------------------
     
-    foreground_map =  guidedfilter_vid_color(frames, foreground_map, imageFilterRadius, videoFilterRadius, epsilon) * 255;
+    %spatial guided image filter approximates a matting algorithm when being applied to binary segmentations
+    %bringing the grayscale (double) mask to 8-bit color space, for saving as png
+    foreground_map = guidedfilter_vid_color(frames, foreground_map, imageFilterRadius, videoFilterRadius, epsilon) * 255;
     
     
 end
