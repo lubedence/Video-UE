@@ -2,6 +2,10 @@
 function exercise2(input_directory, output_directory, file_extension)
     %close all figures
     close all;  
+    
+    %parameters
+    alpha = 0.1;
+    iterations = 50;
 
     % check optional file extension parameter
     if (~exist('file_extension')) || (isempty(file_extension))
@@ -34,8 +38,9 @@ function exercise2(input_directory, output_directory, file_extension)
         % Task a: Compute optical flow vectors
         %------------------------------------------------------------------
         % call function get_opticalflow 
-        % return parameter=get_opticalflow(parameters,...);
+        % return parameter=get_opticalflow(img1, img2, alpha, iterations);
     
+        flow = get_opticalflow(firstframe, secondframe, alpha, iterations);
         
         %------------------------------------------------------------------
         % Task b+c: Generate new frame

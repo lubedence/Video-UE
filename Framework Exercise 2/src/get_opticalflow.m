@@ -28,6 +28,10 @@ for i=1:iterations
     % Task a: compute optical flow vectors 
     %----------------------------------------------------------------------
 
+    u = uAvg - ( Fx .* ( ( Fx .* uAvg ) +( Fy .* vAvg ) + Ft ) ) ./ ( Fx.^2 + Fy.^2 + alpha);
+    v = vAvg - ( Fy .* ( ( Fx .* uAvg ) + ( Fy .* vAvg ) + Ft ) ) ./ ( Fx.^2 + Fy.^2 + alpha);
+    u = medfilt2(u, [3 3]);
+    v = medfilt2(v, [3 3]);
 end
 
 %3. return result
