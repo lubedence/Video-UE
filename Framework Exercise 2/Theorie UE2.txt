@@ -1,0 +1,14 @@
+Question A
+Horn & Schmuck nimmt beim "fill" die Optical Flow Werte von Pixeln in der Umgebung. Falls also keine Flow Informationen zu einem Pixel existieren werden generiert.
+
+
+Question B
+Man würde ungefähr den zweiten Frame des Inputs bekommen. Der resultierende Frame ist zeitlich gleich wie der zweite Frame.
+
+
+Question C
+img1 = Bild t1
+img2 = Bild t2
+Iterations = Anzahl der Iterationen um eine möglichst gute Konvergenz zu erreichen und dennoch gute Laufzeit zu haben
+alpha = 
+Der Aufruf von getDerivatives berechnet die erste Ableitung. 
