@@ -30,8 +30,10 @@ for i=1:iterations
 
     u = uAvg - ( Fx .* ( ( Fx .* uAvg ) +( Fy .* vAvg ) + Ft ) ) ./ ( Fx.^2 + Fy.^2 + alpha);
     v = vAvg - ( Fy .* ( ( Fx .* uAvg ) + ( Fy .* vAvg ) + Ft ) ) ./ ( Fx.^2 + Fy.^2 + alpha);
-    u = medfilt2(u, [3 3]);
-    v = medfilt2(v, [3 3]);
+    filterSize = 7;
+    u = medfilt2(u, [filterSize filterSize]);
+    v = medfilt2(v, [filterSize filterSize]);
+    
 end
 
 %3. return result
