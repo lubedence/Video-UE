@@ -38,7 +38,7 @@ function exercise2(input_directory, output_directory, file_extension)
         
         fprintf('intermediate frame after %3d - %5.1f%%\n', j, j/(numel(file_list)-1)*100);
         alpha = 100;
-        iterations = 200;
+        iterations = 25;
         flow = get_opticalflow(rgb2gray(firstframe), rgb2gray(secondframe), alpha, iterations);
         
         %------------------------------------------------------------------
