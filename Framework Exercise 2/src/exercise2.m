@@ -2,10 +2,6 @@
 function exercise2(input_directory, output_directory, file_extension)
     %close all figures
     close all;  
-    
-    %parameters
-    alpha =100;
-    iterations = 200;
 
     % check optional file extension parameter
     if (~exist('file_extension')) || (isempty(file_extension))
@@ -41,6 +37,8 @@ function exercise2(input_directory, output_directory, file_extension)
         % return parameter=get_opticalflow(img1, img2, alpha, iterations);
         
         fprintf('intermediate frame after %3d - %5.1f%%\n', j, j/(numel(file_list)-1)*100);
+        alpha = 100;
+        iterations = 200;
         flow = get_opticalflow(rgb2gray(firstframe), rgb2gray(secondframe), alpha, iterations);
         
         %------------------------------------------------------------------
