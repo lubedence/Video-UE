@@ -5,7 +5,7 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
     
     cost = Hfc ./ (Hfc + Hbc);  %cost function
     cost(isnan(cost))=0; %nan to zero
-    costBin = (cost > 0.5); %cost values to binary. 0-0.5 == background, else it's foreground
+%   costBin = (cost > 0.5); %cost values to binary. 0-0.5 == background, else it's foreground
     
     foreground_map = zeros(size(frames,1),size(frames,2),size(frames,4)); %init output map
     f=double(bins)/256.0;
@@ -20,7 +20,7 @@ function foreground_map = segmentation(frames,FGScribbles,Hfc,Hbc,bins)
         histIDs=floor(frameR*f) + floor(frameG*f)*bins + floor(frameB*f)*bins*bins+1;
         
         %match every pixel of each frame to foreground(1) or background(0) dependig on the costs.
-        foreground_map(:,:,i) = arrayfun(@(id) (costBin(id) ), histIDs); 
+        foreground_map(:,:,i) = arrayfun(@(id) (cost(id) ), histIDs); 
     end
     
     
