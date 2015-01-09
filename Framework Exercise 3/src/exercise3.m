@@ -53,12 +53,21 @@ function exercise3(input_directory_fg,input_directory_bg, input_directory_fg_map
         %------------------------------------------------------------------
         % Task a: Adjust brightness and resize foreground object
         %------------------------------------------------------------------
-        
+        newHight = 100;
+        luma_factor = 0.8;
+        scaleFactor = newHight/size(fg,1);
+        fg = imresize(fg, scaleFactor, 'bilinear');
+        foreground_map = imresize(foreground_map, scaleFactor, 'bicubic');
+        fg = change_illumination(fg, luma_factor);
+
         %------------------------------------------------------------------
         % Task b: Add shadow of foreground object to background
         %------------------------------------------------------------------
         % call function add_shadow 
         % return parameter=add_shadow(parameters,...);
+        xpos = 90;
+        ypos = 260;
+        bg_with_shadow = add_shadow(xpos-65, ypos+50, bg, foreground_map );
         
         %------------------------------------------------------------------
         % Task c: Merge foreground and background
@@ -66,6 +75,8 @@ function exercise3(input_directory_fg,input_directory_bg, input_directory_fg_map
         % call function merge 
         % return parameter=merge(parameters,...);
        
+        result = merge(xpos, ypos, bg_with_shadow, fg, foreground_map )
+        
         cnt=cnt+1; imwrite(result,  getFileName(cnt,output_directory,file_extension)); 
     end    
     
