@@ -11,7 +11,6 @@ function result = merge(xpos, ypos, bg, fg, foreground_map )
    
     
     foreground = foreground .* fg_map;
-    background = bg .* (1 - fg_map);
-    result = foreground*255 + background;
-    imshow(result/255);
+    background = bg .* (1 - fg_map) / 255;
+    result = foreground + background;
 end

@@ -48,7 +48,7 @@ function exercise3(input_directory_fg,input_directory_bg, input_directory_fg_map
         fg = imread([input_directory_fg '/' file_list_fg(j).name]); %read image  
         bg = imread([input_directory_bg '/' file_list_bg(j).name]); %read image  
         foreground_map=imread([input_directory_fg_map '/' file_list_fg_map(j).name]);  
-        foreground_map=foreground_map/255; %binary map    
+        foreground_map=double(foreground_map)/255; %binary map    
         
         %------------------------------------------------------------------
         % Task a: Adjust brightness and resize foreground object
@@ -57,7 +57,7 @@ function exercise3(input_directory_fg,input_directory_bg, input_directory_fg_map
         luma_factor = 0.8;
         scaleFactor = newHight/size(fg,1);
         fg = imresize(fg, scaleFactor, 'bilinear');
-        foreground_map = imresize(foreground_map, scaleFactor, 'bicubic');
+        foreground_map = imresize(foreground_map, scaleFactor, 'bilinear');
         fg = change_illumination(fg, luma_factor);
 
         %------------------------------------------------------------------
@@ -75,7 +75,7 @@ function exercise3(input_directory_fg,input_directory_bg, input_directory_fg_map
         % call function merge 
         % return parameter=merge(parameters,...);
        
-        result = merge(xpos, ypos, bg_with_shadow, fg, foreground_map )
+        result = merge(xpos, ypos, bg_with_shadow, fg, foreground_map );
         
         cnt=cnt+1; imwrite(result,  getFileName(cnt,output_directory,file_extension)); 
     end    
@@ -85,6 +85,8 @@ function exercise3(input_directory_fg,input_directory_bg, input_directory_fg_map
     %------------------------------------------------------------------
     % call function create_video 
     % create_video(parameters,...);
+    
+    create_video('outputVideo.avi', output_directory,file_extension);
 end
 
 function sName = getFileName(cnt, output_directory,file_extension)

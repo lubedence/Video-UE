@@ -5,7 +5,7 @@ function bg_with_shadow = add_shadow(xpos, ypos, bg, foreground_map )
     %--------------------------------------------------------------------- 
     
     s = imtransform(foreground_map, maketform('projective',[10 -3 0; 10 5 0; 0 0 1]), 'XYScale', [12 22]);
-    h = fspecial('gaussian', [5 5]);
+    h = fspecial('gaussian', 3, 1.5);
     s = imfilter(double(s),h);
     
     shadow = zeros(size(bg, 1), size(bg,2));
