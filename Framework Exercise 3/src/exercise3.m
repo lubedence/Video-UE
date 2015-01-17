@@ -53,21 +53,24 @@ function exercise3(input_directory_fg,input_directory_bg, input_directory_fg_map
         %------------------------------------------------------------------
         % Task a: Adjust brightness and resize foreground object
         %------------------------------------------------------------------
-        newHight = 100;
-        luma_factor = 0.8;
+        
+        newHight = 100; 
+        luma_factor = 0.8; %new brightness
         scaleFactor = newHight/size(fg,1);
-        fg = imresize(fg, scaleFactor, 'bilinear');
-        foreground_map = imresize(foreground_map, scaleFactor, 'bilinear');
-        fg = change_illumination(fg, luma_factor);
+        fg = imresize(fg, scaleFactor, 'bilinear'); %resize fg img
+        foreground_map = imresize(foreground_map, scaleFactor, 'bilinear'); %resize fg map to same size as fg img
+        fg = change_illumination(fg, luma_factor); 
 
         %------------------------------------------------------------------
         % Task b: Add shadow of foreground object to background
         %------------------------------------------------------------------
         % call function add_shadow 
         % return parameter=add_shadow(parameters,...);
-        xpos = 90;
-        ypos = 260;
-        bg_with_shadow = add_shadow(xpos-65, ypos+50, bg, foreground_map );
+        xpos = 90; % absolute xpos of the shadow in bg img
+        ypos = 260; % absolute ypos of the shadow in bg img
+        bg_with_shadow = add_shadow(xpos-65, ypos+50, bg, foreground_map ); %adds shadow to given coordinates. 
+                                                                            %coordinates are changed by empiric values so the
+                                                                            %shadow is properly connected with the fg img
         
         %------------------------------------------------------------------
         % Task c: Merge foreground and background
@@ -86,7 +89,7 @@ function exercise3(input_directory_fg,input_directory_bg, input_directory_fg_map
     % call function create_video 
     % create_video(parameters,...);
     
-    create_video('outputVideo.avi', output_directory,file_extension);
+    create_video('../output/outputVideo.avi', output_directory,file_extension);
 end
 
 function sName = getFileName(cnt, output_directory,file_extension)
